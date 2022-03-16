@@ -18,7 +18,7 @@ import java.util.List;
 @Table(uniqueConstraints = {
         @UniqueConstraint(name = "sns_id_and_sns_type", columnNames = {
         "snsId", "snsType"
-})})
+}),@UniqueConstraint(columnNames = {"email","nickname"})})
 public class User extends BaseTimeEntity {
 
     @Id
@@ -92,5 +92,9 @@ public class User extends BaseTimeEntity {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
+    }
+
+    public static User of(String email, String nickname, String password){
+        return new User(email, nickname, password);
     }
 }
